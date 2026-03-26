@@ -259,7 +259,7 @@ class DuckTarget {
     draw() {
         ctx.save();
         ctx.translate(this.x, this.y);
-        if (this.direction === -1) ctx.scale(-1, 1);
+        if (this.direction === 1) ctx.scale(-1, 1);
 
         ctx.fillStyle = '#8B4513';
         ctx.beginPath();
@@ -499,17 +499,21 @@ canvas.addEventListener('click', (e) => {
     const gunY = canvas.height - 20;
     const angle = Math.atan2(clickY - gunY, clickX - gunX) + Math.PI / 2;
     const clampedAngle = Math.max(-Math.PI / 3, Math.min(Math.PI / 3, angle));
-    const muzzleX = gunX + Math.sin(clampedAngle) * 82;
-    const muzzleY = gunY - Math.cos(clampedAngle) * 82;
+    const muzzleX = gunX + Math.sin(clampedAngle) * 95;
+    const muzzleY = gunY - Math.cos(clampedAngle) * 95;
     
     electricBalls.push(new ElectricBall(muzzleX, muzzleY, clickX, clickY));
     shots++;
     document.getElementById('shots').textContent = shots;
 });
 
+let gunAnimTime = 0;
+
 function drawShooter() {
     const x = canvas.width / 2;
     const y = canvas.height - 20;
+    
+    gunAnimTime += 0.1;
     
     const angle = Math.atan2(mouseY - y, mouseX - x) + Math.PI / 2;
     const clampedAngle = Math.max(-Math.PI / 3, Math.min(Math.PI / 3, angle));
@@ -518,76 +522,165 @@ function drawShooter() {
     ctx.translate(x, y);
     ctx.rotate(clampedAngle);
 
-    const gunGradient = ctx.createLinearGradient(-15, -60, 15, -60);
-    gunGradient.addColorStop(0, '#1a1a2e');
-    gunGradient.addColorStop(0.3, '#2d2d44');
-    gunGradient.addColorStop(0.7, '#2d2d44');
-    gunGradient.addColorStop(1, '#1a1a2e');
+    const outerGlow = ctx.createRadialGradient(0, -50, 0, 0, -50, 80);
+    outerGlow.addColorStop(0, 'rgba(0, 150, 255, 0.15)');
+    outerGlow.addColorStop(0.5, 'rgba(0, 100, 255, 0.05)');
+    outerGlow.addColorStop(1, 'rgba(0, 50, 255, 0)');
+    ctx.beginPath();
+    ctx.arc(0, -50, 80, 0, Math.PI * 2);
+    ctx.fillStyle = outerGlow;
+    ctx.fill();
+
+    const gunGradient = ctx.createLinearGradient(-18, -60, 18, -60);
+    gunGradient.addColorStop(0, '#0a0a15');
+    gunGradient.addColorStop(0.2, '#1a1a2e');
+    gunGradient.addColorStop(0.5, '#252545');
+    gunGradient.addColorStop(0.8, '#1a1a2e');
+    gunGradient.addColorStop(1, '#0a0a15');
 
     ctx.beginPath();
-    ctx.roundRect(-12, -70, 24, 55, 4);
+    ctx.roundRect(-16, -75, 32, 60, 6);
     ctx.fillStyle = gunGradient;
+    ctx.fill();
+    ctx.strokeStyle = '#0066aa';
+    ctx.lineWidth = 3;
+    ctx.stroke();
+
+    ctx.strokeStyle = '#003366';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.roundRect(-12, -70, 24, 50, 4);
+    ctx.stroke();
+
+    ctx.fillStyle = '#111122';
+    ctx.beginPath();
+    ctx.roundRect(-20, -95, 40, 25, 5);
     ctx.fill();
     ctx.strokeStyle = '#00aaff';
     ctx.lineWidth = 2;
     ctx.stroke();
 
+    ctx.fillStyle = '#0a0a15';
     ctx.beginPath();
-    ctx.roundRect(-8, -80, 16, 15, 3);
-    ctx.fillStyle = '#0d0d1a';
+    ctx.roundRect(-14, -92, 28, 18, 3);
     ctx.fill();
-    ctx.strokeStyle = '#00ddff';
-    ctx.lineWidth = 2;
-    ctx.stroke();
 
-    const muzzleGlow = ctx.createRadialGradient(0, -82, 0, 0, -82, 20);
-    muzzleGlow.addColorStop(0, 'rgba(0, 220, 255, 0.6)');
-    muzzleGlow.addColorStop(0.5, 'rgba(0, 150, 255, 0.3)');
+    for (let i = 0; i < 3; i++) {
+        const yPos = -88 + i * 6;
+        const pulse = Math.sin(gunAnimTime * 3 + i * 0.8) * 0.3 + 0.7;
+        ctx.fillStyle = `rgba(0, 220, 255, ${pulse})`;
+        ctx.shadowColor = '#00ddff';
+        ctx.shadowBlur = 10 * pulse;
+        ctx.beginPath();
+        ctx.roundRect(-10, yPos, 20, 3, 1);
+        ctx.fill();
+    }
+    ctx.shadowBlur = 0;
+
+    const muzzlePulse = Math.sin(gunAnimTime * 4) * 0.3 + 0.7;
+    const muzzleGlow = ctx.createRadialGradient(0, -95, 0, 0, -95, 35 * muzzlePulse);
+    muzzleGlow.addColorStop(0, `rgba(150, 255, 255, ${0.9 * muzzlePulse})`);
+    muzzleGlow.addColorStop(0.3, `rgba(0, 220, 255, ${0.6 * muzzlePulse})`);
+    muzzleGlow.addColorStop(0.6, `rgba(0, 150, 255, ${0.3 * muzzlePulse})`);
     muzzleGlow.addColorStop(1, 'rgba(0, 100, 255, 0)');
     ctx.beginPath();
-    ctx.arc(0, -82, 20, 0, Math.PI * 2);
+    ctx.arc(0, -95, 35, 0, Math.PI * 2);
     ctx.fillStyle = muzzleGlow;
     ctx.fill();
 
-    const handleGradient = ctx.createLinearGradient(-12, 0, 12, 0);
-    handleGradient.addColorStop(0, '#1a1a2e');
-    handleGradient.addColorStop(0.5, '#252540');
-    handleGradient.addColorStop(1, '#1a1a2e');
+    ctx.strokeStyle = `rgba(100, 200, 255, ${0.5 + Math.random() * 0.3})`;
+    ctx.lineWidth = 1;
+    for (let i = 0; i < 4; i++) {
+        const arcAngle = (Math.PI * 2 / 4) * i + gunAnimTime;
+        const startX = Math.cos(arcAngle) * 8;
+        const startY = -95 + Math.sin(arcAngle) * 8;
+        ctx.beginPath();
+        ctx.moveTo(startX, startY);
+        const midX = startX + (Math.random() - 0.5) * 10;
+        const midY = startY - 10 + (Math.random() - 0.5) * 5;
+        const endX = (Math.random() - 0.5) * 20;
+        const endY = -110 - Math.random() * 10;
+        ctx.lineTo(midX, midY);
+        ctx.lineTo(endX, endY);
+        ctx.stroke();
+    }
+
+    const handleGradient = ctx.createLinearGradient(-15, 0, 15, 0);
+    handleGradient.addColorStop(0, '#0a0a15');
+    handleGradient.addColorStop(0.3, '#1a1a30');
+    handleGradient.addColorStop(0.5, '#202040');
+    handleGradient.addColorStop(0.7, '#1a1a30');
+    handleGradient.addColorStop(1, '#0a0a15');
 
     ctx.beginPath();
-    ctx.moveTo(-10, -15);
-    ctx.lineTo(-14, 25);
-    ctx.lineTo(14, 25);
-    ctx.lineTo(10, -15);
+    ctx.moveTo(-12, -15);
+    ctx.lineTo(-16, 30);
+    ctx.quadraticCurveTo(-16, 35, -12, 35);
+    ctx.lineTo(12, 35);
+    ctx.quadraticCurveTo(16, 35, 16, 30);
+    ctx.lineTo(12, -15);
     ctx.closePath();
     ctx.fillStyle = handleGradient;
     ctx.fill();
-    ctx.strokeStyle = '#00aaff';
+    ctx.strokeStyle = '#0066aa';
     ctx.lineWidth = 2;
     ctx.stroke();
 
-    ctx.fillStyle = '#00ddff';
+    for (let i = 0; i < 4; i++) {
+        ctx.fillStyle = '#0a0a15';
+        ctx.fillRect(-10, 5 + i * 7, 20, 4);
+    }
+
+    const corePulse = Math.sin(gunAnimTime * 2) * 0.4 + 0.6;
+    
+    ctx.fillStyle = '#0a0a20';
+    ctx.beginPath();
+    ctx.arc(0, -45, 12, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = '#0066aa';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    const coreGlow = ctx.createRadialGradient(0, -45, 0, 0, -45, 10);
+    coreGlow.addColorStop(0, `rgba(200, 255, 255, ${corePulse})`);
+    coreGlow.addColorStop(0.4, `rgba(0, 200, 255, ${0.8 * corePulse})`);
+    coreGlow.addColorStop(0.7, `rgba(0, 100, 255, ${0.4 * corePulse})`);
+    coreGlow.addColorStop(1, 'rgba(0, 50, 255, 0)');
+    ctx.beginPath();
+    ctx.arc(0, -45, 10, 0, Math.PI * 2);
+    ctx.fillStyle = coreGlow;
     ctx.shadowColor = '#00ddff';
-    ctx.shadowBlur = 8;
-    ctx.beginPath();
-    ctx.roundRect(-6, -55, 12, 3, 1);
-    ctx.fill();
-    ctx.beginPath();
-    ctx.roundRect(-6, -48, 12, 3, 1);
-    ctx.fill();
-    ctx.beginPath();
-    ctx.roundRect(-6, -41, 12, 3, 1);
+    ctx.shadowBlur = 15 * corePulse;
     ctx.fill();
     ctx.shadowBlur = 0;
 
-    const coreGlow = ctx.createRadialGradient(0, -50, 0, 0, -50, 8);
-    coreGlow.addColorStop(0, 'rgba(100, 220, 255, 0.9)');
-    coreGlow.addColorStop(0.5, 'rgba(0, 180, 255, 0.5)');
-    coreGlow.addColorStop(1, 'rgba(0, 100, 255, 0)');
+    ctx.strokeStyle = `rgba(0, 200, 255, ${0.3 + corePulse * 0.4})`;
+    ctx.lineWidth = 1;
+    for (let i = 0; i < 3; i++) {
+        const boltY = -60 + i * 8;
+        ctx.beginPath();
+        ctx.moveTo(-8, boltY);
+        for (let j = 0; j < 4; j++) {
+            const px = -8 + (16 / 4) * (j + 1);
+            const py = boltY + (Math.random() - 0.5) * 6;
+            ctx.lineTo(px, py);
+        }
+        ctx.stroke();
+    }
+
+    ctx.fillStyle = '#00ccff';
+    ctx.shadowColor = '#00ffff';
+    ctx.shadowBlur = 8;
+    const indicatorPulse = Math.sin(gunAnimTime * 5) > 0 ? 1 : 0.3;
+    ctx.globalAlpha = indicatorPulse;
     ctx.beginPath();
-    ctx.arc(0, -50, 8, 0, Math.PI * 2);
-    ctx.fillStyle = coreGlow;
+    ctx.arc(-10, -65, 2, 0, Math.PI * 2);
     ctx.fill();
+    ctx.beginPath();
+    ctx.arc(10, -65, 2, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.globalAlpha = 1;
+    ctx.shadowBlur = 0;
 
     ctx.restore();
 }
