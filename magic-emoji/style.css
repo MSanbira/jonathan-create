@@ -1,0 +1,79 @@
+body {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  margin: 0;
+  background: linear-gradient(
+    90deg,
+    red,
+    orange,
+    yellow,
+    green,
+    blue,
+    indigo,
+    violet
+  );
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 3vw;
+  padding: 3vw;
+  background-color: #fff7;
+}
+
+h1 {
+  margin: 0;
+  font-size: 3vw;
+  color: gold;
+  text-shadow: -1px 1px 5px #000;
+}
+
+button {
+  background: gold;
+  padding: 1vw 2vw;
+  border: solid 5px red;
+  cursor: pointer;
+  &:hover {
+    background: linear-gradient(
+      90deg,
+      red,
+      orange,
+      yellow,
+      green,
+      blue,
+      indigo,
+      violet
+    );
+    color: white;
+    text-shadow: -1px 1px 5px #000;
+  }
+}
+
+.emoji-box {
+  padding: 3vw;
+  background: gold;
+  border-radius: 1vw;
+  font-size: 5vw;
+  user-select: none;
+
+  &.magic {
+    animation: magic .7s ease-in-out;
+  }
+}
+
+@keyframes magic {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(360deg) scale(10);
+    background: orange;
+  }
+  100% {
+    transform: rotate(720deg);
+  }
+}

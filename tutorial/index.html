@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎓 Jonathan's Web Tutorial</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>🌟 Learn to Build Websites! 🌟</h1>
+        <p class="subtitle">A fun guide for Jonathan</p>
+    </header>
+
+    <main>
+        <!-- HTML Section -->
+        <section class="lesson html-lesson">
+            <h2>📦 What is HTML?</h2>
+            <div class="lesson-content">
+                <div class="lesson-left">
+                    <div class="explanation">
+                        <p><strong>HTML</strong> is like building blocks! It tells the computer <em>what things are</em> on a page.</p>
+                        <ul>
+                            <li>🏷️ Headings (titles)</li>
+                            <li>📝 Paragraphs (text)</li>
+                            <li>🖼️ Images</li>
+                            <li>🔘 Buttons</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="interactive-box">
+                        <h3>🎮 Try It! Add HTML Elements</h3>
+                        <div class="button-row">
+                            <button onclick="addHeading()">Add a Heading</button>
+                            <button onclick="addParagraph()">Add a Paragraph</button>
+                            <button onclick="addImage()">Add an Emoji</button>
+                            <button onclick="clearHtmlDemo()">Clear All</button>
+                        </div>
+                        <div id="html-demo" class="demo-area">
+                            <p class="placeholder">👆 Click the buttons to add things here!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="lesson-right">
+                    <div class="code-panel">
+                        <h3>📝 The Code</h3>
+                        <pre><code><span class="tag">&lt;h1&gt;</span>This is a Heading<span class="tag">&lt;/h1&gt;</span>
+
+<span class="tag">&lt;p&gt;</span>This is a paragraph.<span class="tag">&lt;/p&gt;</span>
+
+<span class="tag">&lt;button&gt;</span>Click Me!<span class="tag">&lt;/button&gt;</span>
+
+<span class="tag">&lt;img</span> <span class="attr">src=</span><span class="string">"cat.jpg"</span><span class="tag">&gt;</span></code></pre>
+                        <p class="code-note">👆 Tags wrap around content!<br>They tell the browser what things are.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CSS Section -->
+        <section class="lesson css-lesson">
+            <h2>🎨 What is CSS?</h2>
+            <div class="lesson-content">
+                <div class="lesson-left">
+                    <div class="explanation">
+                        <p><strong>CSS</strong> is like paint and decoration! It makes things look pretty.</p>
+                        <ul>
+                            <li>🌈 Colors</li>
+                            <li>📏 Sizes</li>
+                            <li>✨ Effects</li>
+                            <li>📍 Position</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="interactive-box">
+                        <h3>🎮 Try It! Style This Box</h3>
+                        <div id="css-target" class="style-target">
+                            Style Me! 🎁
+                        </div>
+                        <div class="style-controls">
+                            <div class="control-group">
+                                <label>🎨 Background Color:</label>
+                                <div class="color-buttons">
+                                    <button onclick="changeColor('red')" style="background: #ff6b6b;">Red</button>
+                                    <button onclick="changeColor('blue')" style="background: #74b9ff;">Blue</button>
+                                    <button onclick="changeColor('green')" style="background: #55efc4;">Green</button>
+                                    <button onclick="changeColor('yellow')" style="background: #ffeaa7;">Yellow</button>
+                                    <button onclick="changeColor('purple')" style="background: #a29bfe;">Purple</button>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label>📏 Size:</label>
+                                <div class="size-buttons">
+                                    <button onclick="changeSize('small')">Small</button>
+                                    <button onclick="changeSize('medium')">Medium</button>
+                                    <button onclick="changeSize('big')">BIG!</button>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label>🔲 Shape:</label>
+                                <div class="shape-buttons">
+                                    <button onclick="changeShape('square')">Square</button>
+                                    <button onclick="changeShape('rounded')">Rounded</button>
+                                    <button onclick="changeShape('circle')">Circle</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lesson-right">
+                    <div class="code-panel">
+                        <h3>📝 The Code</h3>
+                        <pre><code id="css-code-display"><span class="selector">.box</span> {
+  <span class="property">background-color</span>: <span class="value">gray</span>;
+  <span class="property">width</span>: <span class="value">150px</span>;
+  <span class="property">height</span>: <span class="value">150px</span>;
+  <span class="property">border-radius</span>: <span class="value">10px</span>;
+}</code></pre>
+                        <p class="code-note">👆 CSS uses properties and values!<br>Change them to style elements.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- JavaScript Section -->
+        <section class="lesson js-lesson">
+            <h2>⚡ What is JavaScript?</h2>
+            <div class="lesson-content">
+                <div class="lesson-left">
+                    <div class="explanation">
+                        <p><strong>JavaScript</strong> makes things happen! It's the magic that makes websites interactive.</p>
+                        <ul>
+                            <li>🖱️ Clicks do things</li>
+                            <li>🔢 Math and counting</li>
+                            <li>🎲 Games and animations</li>
+                            <li>💬 Showing messages</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="interactive-box">
+                        <h3>🎮 Try It! JavaScript Magic</h3>
+                        
+                        <div class="js-demo">
+                            <div class="demo-item">
+                                <h4>🔢 Counter</h4>
+                                <p>Count: <span id="counter" class="big-number">0</span></p>
+                                <button onclick="addOne()">+1</button>
+                                <button onclick="subtractOne()">-1</button>
+                                <button onclick="resetCounter()">Reset</button>
+                            </div>
+                            
+                            <div class="demo-item">
+                                <h4>🎨 Random Color Magic</h4>
+                                <div id="magic-box" class="magic-box">✨</div>
+                                <button onclick="magicColor()">🪄 Magic!</button>
+                            </div>
+                            
+                            <div class="demo-item">
+                                <h4>💬 Say Hello</h4>
+                                <input type="text" id="name-input" placeholder="Type your name...">
+                                <button onclick="sayHello()">Say Hello!</button>
+                                <p id="greeting" class="greeting"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lesson-right">
+                    <div class="code-panel">
+                        <h3>📝 The Code</h3>
+                        <pre><code id="js-code-display"><span class="keyword">let</span> count = <span class="number">0</span>;
+
+<span class="keyword">function</span> <span class="function">addOne</span>() {
+  count = count + <span class="number">1</span>;
+}
+
+<span class="keyword">function</span> <span class="function">sayHello</span>(name) {
+  <span class="function">alert</span>(<span class="string">"Hello, "</span> + name);
+}</code></pre>
+                        <p class="code-note">👆 Functions are like recipes!<br>They run when you call them.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Summary Section -->
+        <section class="summary">
+            <h2>🎯 Remember!</h2>
+            <div class="summary-cards">
+                <div class="card html-card">
+                    <h3>HTML</h3>
+                    <p>📦 The STUFF on the page</p>
+                    <p class="analogy">(Like LEGO bricks)</p>
+                </div>
+                <div class="card css-card">
+                    <h3>CSS</h3>
+                    <p>🎨 How it LOOKS</p>
+                    <p class="analogy">(Like paint & stickers)</p>
+                </div>
+                <div class="card js-card">
+                    <h3>JavaScript</h3>
+                    <p>⚡ What it DOES</p>
+                    <p class="analogy">(Like magic spells)</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Made with ❤️ for Jonathan</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

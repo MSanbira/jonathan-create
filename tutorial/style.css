@@ -1,0 +1,407 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Comic Sans MS', 'Chalkboard', cursive, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #333;
+}
+
+header {
+    text-align: center;
+    padding: 30px;
+    background: white;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+header h1 {
+    font-size: 2.5em;
+    color: #6c5ce7;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 1.3em;
+    color: #a29bfe;
+}
+
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Split Layout */
+.lesson-content {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 25px;
+    align-items: start;
+}
+
+.lesson-left {
+    min-width: 0;
+}
+
+.lesson-right {
+    position: sticky;
+    top: 20px;
+}
+
+/* Code Panel */
+.code-panel {
+    background: #2d3436;
+    border-radius: 15px;
+    padding: 20px;
+    color: #dfe6e9;
+    font-family: 'Monaco', 'Consolas', 'Courier New', monospace;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+}
+
+.code-panel h3 {
+    color: #74b9ff;
+    margin-bottom: 15px;
+    font-family: 'Comic Sans MS', 'Chalkboard', cursive, sans-serif;
+    font-size: 1.2em;
+}
+
+.code-panel pre {
+    background: #1e272e;
+    padding: 15px;
+    border-radius: 10px;
+    overflow-x: auto;
+    font-size: 0.85em;
+    line-height: 1.6;
+}
+
+.code-panel code {
+    white-space: pre;
+}
+
+.code-note {
+    margin-top: 15px;
+    font-size: 0.95em;
+    color: #b2bec3;
+    font-family: 'Comic Sans MS', 'Chalkboard', cursive, sans-serif;
+    line-height: 1.5;
+}
+
+/* Code Syntax Colors */
+.tag { color: #e17055; font-weight: bold; }
+.attr { color: #fdcb6e; }
+.string { color: #55efc4; }
+.selector { color: #fd79a8; font-weight: bold; }
+.property { color: #74b9ff; }
+.value { color: #55efc4; }
+.keyword { color: #fd79a8; font-weight: bold; }
+.function { color: #74b9ff; }
+.number { color: #fdcb6e; }
+.comment { color: #636e72; font-style: italic; }
+
+/* Lesson Sections */
+.lesson {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.lesson h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px dashed;
+}
+
+.html-lesson h2 { color: #e17055; border-color: #e17055; }
+.css-lesson h2 { color: #00b894; border-color: #00b894; }
+.js-lesson h2 { color: #fdcb6e; border-color: #fdcb6e; }
+
+.explanation {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+.explanation p {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.explanation ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.explanation li {
+    background: white;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-size: 1.1em;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+/* Interactive Boxes */
+.interactive-box {
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+    padding: 25px;
+    border-radius: 15px;
+    border: 3px dashed #a29bfe;
+}
+
+.interactive-box h3 {
+    color: #6c5ce7;
+    margin-bottom: 20px;
+    font-size: 1.4em;
+}
+
+/* Buttons */
+button {
+    background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 1em;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 5px;
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+.button-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* HTML Demo Area */
+.demo-area {
+    background: white;
+    min-height: 150px;
+    border-radius: 10px;
+    padding: 20px;
+    border: 2px solid #e17055;
+}
+
+.demo-area .placeholder {
+    color: #999;
+    font-style: italic;
+    text-align: center;
+}
+
+.demo-area h1 { color: #e17055; margin: 10px 0; }
+.demo-area p { margin: 10px 0; font-size: 1.1em; }
+.demo-area .emoji-img { font-size: 3em; display: block; margin: 10px 0; }
+
+/* CSS Demo Area */
+.style-target {
+    width: 150px;
+    height: 150px;
+    background: #dfe6e9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 20px auto;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+}
+
+.style-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.control-group {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.control-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.color-buttons button,
+.size-buttons button,
+.shape-buttons button {
+    min-width: 80px;
+}
+
+/* JS Demo Area */
+.js-demo {
+    display: grid;
+    gap: 20px;
+}
+
+.demo-item {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.demo-item h4 {
+    color: #fdcb6e;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+}
+
+.big-number {
+    font-size: 3em;
+    color: #6c5ce7;
+    font-weight: bold;
+}
+
+.magic-box {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    margin: 15px auto;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5em;
+    transition: all 0.3s ease;
+}
+
+#name-input {
+    padding: 12px 20px;
+    font-size: 1.1em;
+    border: 3px solid #fdcb6e;
+    border-radius: 10px;
+    font-family: inherit;
+    margin: 10px;
+    width: 200px;
+}
+
+.greeting {
+    font-size: 1.5em;
+    color: #6c5ce7;
+    margin-top: 15px;
+    min-height: 30px;
+}
+
+/* Summary Section */
+.summary {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.summary h2 {
+    text-align: center;
+    color: #6c5ce7;
+    margin-bottom: 25px;
+    font-size: 2em;
+}
+
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    color: white;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h3 {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+
+.card .analogy {
+    font-size: 1em;
+    opacity: 0.9;
+}
+
+.html-card { background: linear-gradient(135deg, #e17055 0%, #d63031 100%); }
+.css-card { background: linear-gradient(135deg, #00b894 0%, #00a085 100%); }
+.js-card { background: linear-gradient(135deg, #fdcb6e 0%, #e17055 100%); }
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    color: white;
+    font-size: 1.2em;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .lesson-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .lesson-right {
+        position: static;
+    }
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 1.8em;
+    }
+    
+    .lesson {
+        padding: 20px;
+    }
+    
+    .lesson h2 {
+        font-size: 1.5em;
+    }
+    
+    button {
+        padding: 10px 15px;
+        font-size: 0.9em;
+    }
+    
+    .style-target {
+        width: 120px;
+        height: 120px;
+    }
+}
